@@ -1,0 +1,103 @@
+/* === Reset basic box model and margin/padding === */
+*{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; }
+
+/* === Global body styles === */
+body{
+    /* Font family fallback list, line height 1.6 */
+    font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    color:#1f2937;       /* Dark gray text */
+    background:#fafafa;  /* Light gray background */
+}
+
+/* === Container class for max-width layout === */
+.container{
+    max-width:960px;     /* Limit width for readability */
+    margin:auto;         /* Center align */
+    padding:0 20px;      /* Left/right padding */
+}
+
+/* === Header styles === */
+.site-header{
+    background:#f0f9ff;             /* Light blue background */
+    border-bottom:1px solid #e5e7eb;/* Thin gray border at bottom */
+    padding:40px 0 28px;            /* Top/bottom padding */
+}
+.site-header h1{
+    margin:0 0 6px;   /* Remove default margin and add bottom spacing */
+    font-size:34px;   /* Larger font for main name */
+    letter-spacing:.5px; /* Slight spacing between letters */
+}
+.subtitle{
+    margin:0 0 10px; /* Space below subtitle */
+    color:#6b7280;   /* Muted gray color */
+}
+
+/* === Contact list (mobile responsive flex layout) === */
+.contacts{
+    display:flex;        /* Flexbox layout */
+    flex-wrap:wrap;      /* Wrap to new line if too long */
+    gap:18px;            /* Space between items */
+    list-style:none;     /* Remove bullets */
+    padding:0;
+    margin:10px 0 0;
+}
+.contacts a{
+    color:#2563eb;       /* Blue links */
+    text-decoration:none;
+}
+.contacts a:hover{ text-decoration:underline; } /* Add underline on hover */
+
+/* === Main content container === */
+main.container{ padding:28px 20px; }
+
+/* === Section styles (Education, Work Experience, etc.) === */
+.section{
+    margin:24px 0;                /* Vertical spacing between sections */
+    padding:20px;                 /* Inner spacing */
+    background:#ffffff;           /* White card background */
+    border:1px solid #e5e7eb;     /* Light gray border */
+}
+.section h2{ margin:0 0 14px; font-size:22px; } /* Section headings */
+
+/* === Item block (school, job, project, etc.) === */
+.item{ margin:14px 0 10px; }
+
+/* === Item head: title on left, date on right === */
+.item-head{
+    display:flex;                 /* Flexbox for horizontal alignment */
+    justify-content:space-between;/* Push title left, date right */
+    gap:12px;
+    flex-wrap:wrap;               /* Wrap on small screens */
+}
+.item-head h3{ margin:0; font-size:18px; }
+.meta{ color:#6b7280; }           /* Muted date text */
+.muted{ color:#6b7280; }          /* Muted description text */
+
+/* === Default list styling === */
+ul{ padding-left:18px; margin:10px 0; }
+
+/* === Two-column list (e.g., Additional section) === */
+.two-col{ padding-left:18px; }
+
+/* === Grid-2: Projects and Activities side by side === */
+.grid-2{
+    display:flex; /* Use Flexbox (instead of CSS grid for simplicity) */
+    gap:20px;
+}
+.grid-2 > div{ flex:1; } /* Each child takes equal space */
+
+/* === Footer styles === */
+.site-footer{
+    margin:20px 0 40px; /* Space around footer */
+    color:#6b7280;      /* Muted text */
+    font-size:14px;
+    text-align:center;
+}
+
+/* === Responsive styles for screens smaller than 768px === */
+@media (max-width:768px){
+    .grid-2{ flex-direction:column; } /* Stack columns vertically */
+    .site-header{ padding:28px 0 20px; }
+    .site-header h1{ font-size:28px; } /* Smaller title font */
+}
