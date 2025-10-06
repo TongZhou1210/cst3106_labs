@@ -1,0 +1,146 @@
+/* ===== Design Tokens ===== */
+:root{
+    --navy-900:#0B1F3A; --navy-700:#123B6B;
+    --beige-50:#F5F1E8; --beige-100:#EAE6DD;
+    --gray-700:#374151; --gray-500:#6B7280;
+    --yellow-400:#F7C948;
+    --border:#E5E7EB; --link:#345C9C;
+
+    --radius:14px;
+    --shadow:0 1px 2px rgba(0,0,0,.04);
+    --space-1:8px; --space-2:12px; --space-3:16px; --space-4:20px; --space-6:24px;
+}
+
+/* ===== Reset & Base ===== */
+*{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; }
+
+body{
+    background:var(--beige-50);
+    color:var(--gray-700);
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "PingFang SC","Hiragino Sans GB","Microsoft YaHei", sans-serif;
+    font-size:16px; line-height:1.6;
+}
+
+/* Container */
+.container{ max-width:960px; margin:auto; padding:0 20px; }
+
+/* ===== Header ===== */
+.site-header{
+    background:var(--navy-900);
+    color:#fff;
+    padding:40px 0 28px;
+    position:relative;
+}
+.site-header h1{
+    margin:0 0 6px;
+    font-family:"Cormorant Garamond", serif;
+    font-weight:700;
+    font-size:34px;
+    letter-spacing:.3px;
+}
+.subtitle{
+    margin:0 0 10px;
+    color:rgba(255,255,255,.85);
+    font-weight:500;
+}
+.contacts{
+    display:flex; flex-wrap:wrap; gap:18px;
+    list-style:none; padding:0; margin:10px 0 0;
+}
+.contacts a{
+    color:var(--yellow-400);
+    text-decoration:none;
+}
+.contacts a:hover{ text-decoration:underline; }
+.header-accent{
+    height:3px; background:var(--yellow-400);
+    position:absolute; left:0; right:0; bottom:0;
+}
+
+/* ===== Main ===== */
+.main{ padding:28px 20px; }
+
+/* Cards / Sections */
+.card{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+}
+.section{
+    margin:24px 0; padding:20px;
+}
+.section h2{
+    margin:0 0 14px;
+    font-family:"Cormorant Garamond", serif;
+    font-weight:600; font-size:22px;
+    color:var(--navy-700);
+    padding-bottom:6px;
+    border-bottom:2px solid var(--beige-100);
+}
+
+/* Items */
+.item{ margin:14px 0 10px; }
+.item-head{
+    display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+}
+.item-head h3{
+    margin:0; font-size:18px;
+    font-family:"Cormorant Garamond", serif; font-weight:600;
+    color:var(--navy-900);
+}
+.meta{ color:var(--gray-500); font-size:14px; font-weight:500; }
+.muted{ color:var(--gray-500); }
+
+/* Lists */
+ul{ padding-left:18px; margin:10px 0; }
+ul li{ margin-bottom:8px; line-height:1.6; }
+.two-col{ padding-left:18px; columns:2; column-gap:28px; }
+.two-col li{ break-inside:avoid; }
+
+/* Links */
+a{ color:var(--link); text-decoration:none; }
+a:hover{ text-decoration:underline; }
+
+/* Footer */
+.site-footer{
+    margin:20px 0 40px;
+    color:var(--gray-500);
+    font-size:14px; text-align:center;
+}
+
+/* Fix: align Project/Activities with other full-width sections */
+.grid-2.section{
+    padding: 0;          /* remove the 20px padding coming from .section */
+    margin: 24px 0;      /* keep the same vertical rhythm as other sections */
+}
+
+/* Keep the two cards identical to other cards */
+.grid-2{
+    display: flex;
+    gap: 20px;
+}
+.grid-2 > .card{
+    flex: 1;
+    padding: 20px;       /* same inner spacing as .section.card */
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+.grid-2 h2{
+    margin: 0 0 14px;
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--navy-700);
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--beige-100);
+}
+
+/* Mobile: stack neatly like other sections */
+@media (max-width:768px){
+    .grid-2{ flex-direction: column; }
+    .grid-2 > .card{ width: 100%; }  /* ensure full width when stacked */
+}
