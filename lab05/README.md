@@ -1,30 +1,48 @@
 # 🎲 Yatzy Game – Lab05
 
 ## 📌 Overview
-Yatzy is a classic dice game where players roll five dice up to three times per turn to achieve specific scoring combinations. The game is similar to Yahtzee and is based on both luck and strategy.
+This is a **single-player version** of Yatzy designed as a self-challenge game to achieve the highest possible score.  
+Players roll five dice and fill in categories on the scorecard. The game is based on both luck and strategy, requiring the player to decide wisely which category to score after each roll.
 
 ---
 
 ## 📖 Game Rules
 
 1. **Dice Rolling**
-    - Each player rolls **five dice**.
-    - A player may roll up to **three times per turn**.
-    - After each roll, the player can choose which dice to keep and which dice to re-roll.
+    - Each turn, the player rolls **five dice**.
+    - The player may roll the dice **once per turn**.
+    - After rolling, the player can choose to **keep some dice** and re-roll the rest.
 
 2. **Scoring**
-    - Players aim to achieve specific scoring categories, such as:
-        - **Three-of-a-Kind** – at least three dice with the same value.
-        - **Four-of-a-Kind** – at least four dice with the same value.
-        - **Full House** – a pair and a three-of-a-kind.
-        - **Small Straight** – a sequence of 4 numbers (e.g., 1-2-3-4).
-        - **Large Straight** – a sequence of 5 numbers (e.g., 2-3-4-5-6).
-        - **Yatzy** – all five dice show the same number (highest score).
+    - The scorecard has two sections: **Upper Section** and **Lower Section**.
 
-3. **Turn and Game End**
-    - Each player fills in one scoring category per turn.
-    - Once all categories are filled, the game ends.
-    - The player with the highest total score wins.
+   **Upper Section**
+    - **Ones (1s)** → Add all dice showing 1.
+    - **Twos (2s)** → Add all dice showing 2.
+    - **Threes (3s)** → Add all dice showing 3.
+    - **Fours (4s)** → Add all dice showing 4.
+    - **Fives (5s)** → Add all dice showing 5.
+    - **Sixes (6s)** → Add all dice showing 6.
+
+   👉 Example: if you roll **2, 2, 5, 6, 6**:
+    - If you choose **Twos**, your score = 2 + 2 = **4 points**
+    - If you choose **Sixes**, your score = 6 + 6 = **12 points**
+
+   **Lower Section**
+    - **Three-of-a-Kind** → At least 3 dice the same → Score = sum of all 5 dice.
+    - **Four-of-a-Kind** → At least 4 dice the same → Score = sum of all 5 dice.
+    - **Full House** → A pair + three-of-a-kind (e.g., 2-2-3-3-3) → **25 points**.
+    - **Small Straight** → Sequence of 4 numbers (e.g., 1-2-3-4 or 3-4-5-6) → **30 points**.
+    - **Large Straight** → Sequence of 5 numbers (1-2-3-4-5 or 2-3-4-5-6) → **40 points**.
+    - **Chance** → Any combination, score = sum of all 5 dice (flexible “wild card”).
+    - **Yatzy** → All 5 dice identical (e.g., 6-6-6-6-6) → **50 points**.
+
+3. **Turns and Game End**
+    - Each turn, the player must record a score in one available category.
+    - The game ends when all categories are filled or the player chooses to end early.
+    - The game displays:
+        - The **final score**
+        - A message: 🎉 Congratulatory if the player beats their high score, 😢 Consolation if not.
 
 ---
 

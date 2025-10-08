@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1c454495-fb11-44d8-acf3-d2c56b206b25" name="Changes" comment="&#10;Changes include:&#10;- Added HTML structure with semantic tags (&lt;header&gt;, &lt;main&gt;, &lt;section&gt;, &lt;footer&gt;)&#10;- Implemented resume sections: Education, Work Experience, Projects, Activities, Additional Information&#10;- Applied CSS styling for layout and typography&#10;- Used Flexbox for contacts list and two-column layout&#10;- Added responsive design with @media query for mobile view&#10;- Updated footer to dynamically show the current year">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab05/design_system.md " beforeDir="false" afterPath="$PROJECT_DIR$/lab05/design_system.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab05/mock-ups/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/lab05/mock-ups/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab05/mock-ups/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/lab05/mock-ups/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab05/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/lab05/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
