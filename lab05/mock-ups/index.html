@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Yatzy – Mockup</title>
+
+    <!-- Colors and fonts follow the design_system.md -->
+    <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+<header class="site-header">
+    <h1>Yatzy</h1>
+    <p class="sub">Mock-up · Dice + Scoreboard + Controls</p>
+</header>
+
+<main class="container">
+    <!-- === Controls Section === -->
+    <section class="panel controls">
+        <div class="controls-row">
+            <button id="btn-roll" class="btn btn-primary">Roll Dice</button>
+            <button id="btn-reset" class="btn btn-outline">Reset</button>
+        </div>
+        <p class="hint">Tip: This is a visual mock-up. Only “Roll Dice” has a simple animation.</p>
+    </section>
+
+    <!-- === Dice Area (5 dice) === -->
+    <section class="panel dice-area">
+        <h2 class="panel-title">Dice</h2>
+
+        <div class="dice-row">
+            <!-- Each .die uses the same sprite sheet dice1.jpg (6 horizontal frames) -->
+            <div class="die" data-index="1" aria-label="die 1"></div>
+            <div class="die" data-index="2" aria-label="die 2"></div>
+            <div class="die" data-index="3" aria-label="die 3"></div>
+            <div class="die" data-index="4" aria-label="die 4"></div>
+            <div class="die" data-index="5" aria-label="die 5"></div>
+        </div>
+
+        <!-- Hold checkboxes are only placeholders for visual mock-up -->
+        <div class="hold-row">
+            <label><input type="checkbox" disabled /> Hold</label>
+            <label><input type="checkbox" disabled /> Hold</label>
+            <label><input type="checkbox" disabled /> Hold</label>
+            <label><input type="checkbox" disabled /> Hold</label>
+            <label><input type="checkbox" disabled /> Hold</label>
+        </div>
+    </section>
+
+    <!-- === Scoreboard (sample categories, mock-up only) === -->
+    <section class="panel scoreboard">
+        <h2 class="panel-title">Scorecard</h2>
+
+        <table class="score-table">
+            <thead>
+            <tr>
+                <th>Category</th>
+                <th>Score</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr><td>Ones</td><td class="muted">—</td></tr>
+            <tr><td>Twos</td><td class="muted">—</td></tr>
+            <tr><td>Threes</td><td class="muted">—</td></tr>
+            <tr><td>Fours</td><td class="muted">—</td></tr>
+            <tr><td>Fives</td><td class="muted">—</td></tr>
+            <tr><td>Sixes</td><td class="muted">—</td></tr>
+            <tr class="sep"><td>Subtotal</td><td>0</td></tr>
+            <tr><td>Three of a kind</td><td class="muted">—</td></tr>
+            <tr><td>Four of a kind</td><td class="muted">—</td></tr>
+            <tr><td>Full House</td><td class="muted">—</td></tr>
+            <tr><td>Small Straight</td><td class="muted">—</td></tr>
+            <tr><td>Large Straight</td><td class="muted">—</td></tr>
+            <tr><td>Yatzy</td><td class="muted">—</td></tr>
+            <tr class="total"><td>Total</td><td>0</td></tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+
+<footer class="site-footer">
+    © 2025 Yatzy mock-up for CST3106 Lab05
+</footer>
+
+<!-- Only roll button triggers a fake animation, no real Yatzy rules -->
+<script>
+    const btnRoll = document.getElementById('btn-roll');
+    const btnReset = document.getElementById('btn-reset');
+    const dice = Array.from(document.querySelectorAll('.die'));
+
+    btnRoll.addEventListener('click', () => {
+        btnRoll.disabled = true;
+
+        // Start rolling animation with CSS sprite steps
+        dice.forEach(d => {
+            d.style.animation = 'roll 700ms steps(6) infinite';
+        });
+
+        // Stop after 700ms and display a random face
+        setTimeout(() => {
+            dice.forEach(d => {
+                const face = Math.floor(Math.random() * 6) + 1; // random 1..6
+                d.style.animation = 'none';
+                d.style.backgroundPosition = (-100 * (face - 1)) + '% 0';
+            });
+            btnRoll.disabled = false;
+        }, 700);
+    });
+
+    btnReset.addEventListener('click', () => {
+        // Reset all dice to face 1
+        dice.forEach(d => {
+            d.style.animation = 'none';
+            d.style.backgroundPosition = '0 0';
+        });
+    });
+</script>
+</body>
+</html>

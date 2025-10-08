@@ -1,0 +1,160 @@
+/* ===== Design tokens (from design_system.md) ===== */
+:root{
+    --green-700:#2E7D32;     /* Primary dark green */
+    --green-600:#388E3C;     /* Success/confirm */
+    --red-600:#D32F2F;       /* Error/warning */
+    --yellow-500:#FBC02D;    /* Bonus/highlight */
+    --bg:#F5F5F5;            /* Light gray background */
+    --text:#1F2937;          /* Main text */
+    --muted:#6B7280;         /* Secondary text */
+    --card:#FFFFFF;          /* Panel background */
+    --border:#E5E7EB;        /* Border line */
+    --radius:14px;
+    --shadow:0 1px 2px rgba(0,0,0,.06);
+}
+
+/* ===== Base ===== */
+*{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; }
+body{
+    background:var(--bg);
+    color:var(--text);
+    font:16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* ===== Header / Footer ===== */
+.site-header{
+    background:var(--green-700);
+    color:#fff;
+    padding:28px 16px 22px;
+    border-bottom:3px solid var(--yellow-500);
+}
+.site-header h1{
+    margin:0 0 6px;
+    font-weight:700;
+    letter-spacing:.3px;
+}
+.site-header .sub{ margin:0; opacity:.9; }
+
+.site-footer{
+    text-align:center;
+    color:var(--muted);
+    font-size:14px;
+    margin:24px 0 32px;
+}
+
+/* ===== Layout ===== */
+.container{
+    max-width:980px;
+    margin:0 auto;
+    padding:20px 16px;
+    display:grid;
+    grid-template-columns: 1fr;
+    gap:20px;
+}
+@media (min-width: 960px){
+    .container{
+        grid-template-columns: 1fr 1fr;
+        align-items:start;
+    }
+    .controls{ grid-column: 1 / -1; }
+}
+
+/* ===== Panels / Cards ===== */
+.panel{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:16px;
+}
+.panel-title{
+    margin:0 0 12px;
+    color:var(--green-700);
+    font-weight:700;
+}
+
+/* ===== Buttons ===== */
+.btn{
+    appearance:none;
+    border:none;
+    border-radius:10px;
+    padding:10px 16px;
+    font-weight:600;
+    cursor:pointer;
+}
+.btn:disabled{ opacity:.6; cursor:not-allowed; }
+.btn-primary{ background:var(--green-700); color:#fff; }
+.btn-primary:hover{ background:#255f28; }
+.btn-outline{
+    background:#fff; color:var(--green-700);
+    border:2px solid var(--green-700);
+    margin-left:8px;
+}
+.btn-outline:hover{ background:#f3faf3; }
+
+/* Red outline Reset button */
+#btn-reset{
+    color: var(--red-600);
+    border: 2px solid var(--red-600);
+    background: #fff;
+}
+#btn-reset:hover{
+    background: #fff5f5; /* very light red hover */
+}
+
+/* ===== Controls ===== */
+.controls-row{ display:flex; align-items:center; gap:8px; }
+.hint{ margin:8px 0 0; color:var(--muted); font-size:14px; }
+
+/* ===== Dice ===== */
+.dice-area .dice-row{
+    display:flex; gap:12px; flex-wrap:wrap;
+}
+.die{
+    width:88px; height:88px;
+    border-radius:12px;
+    border:1px solid var(--border);
+    background-image:url('../dice1.jpg'); /* Path to dice sprite sheet */
+    background-size:600% 100%;            /* 6 horizontal frames */
+    background-position:0 0;              /* Initial face = 1 */
+    box-shadow:var(--shadow);
+}
+
+/* Rolling animation: move through the sprite with steps(6) */
+@keyframes roll{
+    0%{ background-position: 0 0; }
+    100%{ background-position: -600% 0; }
+}
+
+.hold-row{
+    margin-top:10px;
+    display:flex; gap:32px;
+    color:var(--muted);
+}
+
+/* ===== Scoreboard ===== */
+.score-table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:15px;
+}
+.score-table th,
+.score-table td{
+    border-bottom:1px solid var(--border);
+    padding:10px 12px;
+    text-align:left;
+}
+.score-table thead th{
+    background:#FAFAFA;
+}
+.score-table tr.sep td{
+    border-top:2px solid var(--border);
+    font-weight:600;
+}
+.score-table tr.total td{
+    border-top:2px solid var(--green-700);
+    font-weight:700;
+    color:var(--green-700);
+}
+.muted{ color:var(--muted); }
