@@ -10,7 +10,7 @@ Players roll five dice and fill in categories on the scorecard. The game is base
 
 1. **Dice Rolling**
     - Each turn, the player rolls **five dice**.
-    - The player may roll the dice **once per turn**.
+    - The player may roll the dice **three times per turn**.
     - After rolling, the player can choose to **keep some dice** and re-roll the rest.
 
 2. **Scoring**

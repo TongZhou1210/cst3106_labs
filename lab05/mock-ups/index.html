@@ -3,60 +3,77 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Yatzy – Mockup</title>
-
-    <!-- Colors and fonts follow the design_system.md -->
+    <title>Yatzy – Single Player Mock</title>
     <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
 <header class="site-header">
     <h1>Yatzy</h1>
-    <p class="sub">Mock-up · Dice + Scoreboard + Controls</p>
+    <p class="sub">Single Player · Dice + Scoreboard + High Score</p>
 </header>
 
 <main class="container">
-    <!-- === Controls Section === -->
-    <section class="panel controls">
-        <div class="controls-row">
+    <!-- =========================
+         LEFT: Dice + Turn Controls
+         (Controls are placed BELOW the last die)
+         ========================= -->
+    <section class="panel dice-panel">
+
+        <!-- Centered block with a VERTICAL list of dice rows.
+             Each row = die (left) + Hold button (right). -->
+        <div class="dice-block">
+            <div class="dice-list" role="group" aria-label="dice area">
+                <div class="dice-item">
+                    <div class="die" data-index="1" aria-label="die 1"></div>
+                    <button class="hold-toggle" data-for="1" aria-pressed="false">Hold</button>
+                </div>
+                <div class="dice-item">
+                    <div class="die" data-index="2" aria-label="die 2"></div>
+                    <button class="hold-toggle" data-for="2" aria-pressed="false">Hold</button>
+                </div>
+                <div class="dice-item">
+                    <div class="die" data-index="3" aria-label="die 3"></div>
+                    <button class="hold-toggle" data-for="3" aria-pressed="false">Hold</button>
+                </div>
+                <div class="dice-item">
+                    <div class="die" data-index="4" aria-label="die 4"></div>
+                    <button class="hold-toggle" data-for="4" aria-pressed="false">Hold</button>
+                </div>
+                <div class="dice-item">
+                    <div class="die" data-index="5" aria-label="die 5"></div>
+                    <button class="hold-toggle" data-for="5" aria-pressed="false">Hold</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls row is BELOW the last die now -->
+        <div class="controls-row controls-row--bottom">
             <button id="btn-roll" class="btn btn-primary">Roll Dice</button>
+            <button id="btn-end-turn" class="btn btn-outline">End Turn</button>
+            <button id="btn-end" class="btn btn-danger">End Game</button>
             <button id="btn-reset" class="btn btn-outline">Reset</button>
+            <span id="rolls-indicator" class="badge" aria-live="polite">Rolls Left: 3</span>
         </div>
-        <p class="hint">Tip: This is a visual mock-up. Only “Roll Dice” has a simple animation.</p>
+
+        <p class="hint">
+            Mock version: animation + simple “Chance/Total” scoring & High Score (local).<br/>
+            <em>Holds are visual only in this mock. Full dice-hold logic can be added later.</em>
+        </p>
     </section>
 
-    <!-- === Dice Area (5 dice) === -->
-    <section class="panel dice-area">
-        <h2 class="panel-title">Dice</h2>
-
-        <div class="dice-row">
-            <!-- Each .die uses the same sprite sheet dice1.jpg (6 horizontal frames) -->
-            <div class="die" data-index="1" aria-label="die 1"></div>
-            <div class="die" data-index="2" aria-label="die 2"></div>
-            <div class="die" data-index="3" aria-label="die 3"></div>
-            <div class="die" data-index="4" aria-label="die 4"></div>
-            <div class="die" data-index="5" aria-label="die 5"></div>
-        </div>
-
-        <!-- Hold checkboxes are only placeholders for visual mock-up -->
-        <div class="hold-row">
-            <label><input type="checkbox" disabled /> Hold</label>
-            <label><input type="checkbox" disabled /> Hold</label>
-            <label><input type="checkbox" disabled /> Hold</label>
-            <label><input type="checkbox" disabled /> Hold</label>
-            <label><input type="checkbox" disabled /> Hold</label>
-        </div>
-    </section>
-
-    <!-- === Scoreboard (sample categories, mock-up only) === -->
+    <!-- =========================
+         RIGHT: Scoreboard
+         ========================= -->
     <section class="panel scoreboard">
         <h2 class="panel-title">Scorecard</h2>
 
+        <div class="high-score">
+            🏆 High Score: <span id="high-score">0</span>
+        </div>
+
         <table class="score-table">
             <thead>
-            <tr>
-                <th>Category</th>
-                <th>Score</th>
-            </tr>
+            <tr><th>Category</th><th>Score</th></tr>
             </thead>
             <tbody>
             <tr><td>Ones</td><td class="muted">—</td></tr>
@@ -65,53 +82,141 @@
             <tr><td>Fours</td><td class="muted">—</td></tr>
             <tr><td>Fives</td><td class="muted">—</td></tr>
             <tr><td>Sixes</td><td class="muted">—</td></tr>
-            <tr class="sep"><td>Subtotal</td><td>0</td></tr>
+
+            <tr class="sep"><td>Subtotal</td><td id="subtotal-score">0</td></tr>
+
             <tr><td>Three of a kind</td><td class="muted">—</td></tr>
             <tr><td>Four of a kind</td><td class="muted">—</td></tr>
             <tr><td>Full House</td><td class="muted">—</td></tr>
             <tr><td>Small Straight</td><td class="muted">—</td></tr>
             <tr><td>Large Straight</td><td class="muted">—</td></tr>
+            <tr><td>Chance</td><td id="chance-score" class="muted">—</td></tr>
             <tr><td>Yatzy</td><td class="muted">—</td></tr>
-            <tr class="total"><td>Total</td><td>0</td></tr>
+
+            <tr class="total"><td>Total</td><td id="total-score">0</td></tr>
             </tbody>
         </table>
     </section>
 </main>
 
 <footer class="site-footer">
-    © 2025 Yatzy mock-up for CST3106 Lab05
+    © 2025 Yatzy mock for CST3106 Lab05
 </footer>
 
-<!-- Only roll button triggers a fake animation, no real Yatzy rules -->
+
 <script>
-    const btnRoll = document.getElementById('btn-roll');
-    const btnReset = document.getElementById('btn-reset');
-    const dice = Array.from(document.querySelectorAll('.die'));
+    // ------- Elements -------
+    const btnRoll    = document.getElementById('btn-roll');
+    const btnEnd     = document.getElementById('btn-end');
+    const btnReset   = document.getElementById('btn-reset');
+    const btnEndTurn = document.getElementById('btn-end-turn');
 
-    btnRoll.addEventListener('click', () => {
-        btnRoll.disabled = true;
+    const diceEls    = Array.from(document.querySelectorAll('.die'));
+    const holdBtns   = Array.from(document.querySelectorAll('.hold-toggle'));
 
-        // Start rolling animation with CSS sprite steps
-        dice.forEach(d => {
-            d.style.animation = 'roll 700ms steps(6) infinite';
+    const chanceEl    = document.getElementById('chance-score');
+    const totalEl     = document.getElementById('total-score');
+    const subtotalEl  = document.getElementById('subtotal-score');
+    const highScoreEl = document.getElementById('high-score');
+    const rollsUI     = document.getElementById('rolls-indicator');
+
+    // ------- State -------
+    let faces = [1,1,1,1,1];
+    const HS_KEY = 'yatzyHighScore';
+    const MAX_ROLLS = 3;
+    let rollsLeft = MAX_ROLLS;
+
+    // ------- Helpers -------
+    function loadHighScore(){
+        const v = Number(localStorage.getItem(HS_KEY) || 0);
+        highScoreEl.textContent = v;
+        return v;
+    }
+    function saveHighScore(v){
+        localStorage.setItem(HS_KEY, String(v));
+        highScoreEl.textContent = v;
+    }
+    function setFacesVisual(){
+        diceEls.forEach((d, i) => {
+            const offset = -(faces[i]-1) * 100;
+            d.style.animation = 'none';
+            d.style.backgroundPosition = `${offset}% 0`;
         });
-
-        // Stop after 700ms and display a random face
+    }
+    function randomizeFaces(){
+        faces = faces.map(() => Math.floor(Math.random()*6) + 1);
+        setFacesVisual();
+    }
+    function rollAnimationThenSet(){
+        if (rollsLeft <= 0) return;
+        btnRoll.disabled = true;
+        diceEls.forEach(d => d.style.animation = 'roll 700ms steps(6) infinite');
         setTimeout(() => {
-            dice.forEach(d => {
-                const face = Math.floor(Math.random() * 6) + 1; // random 1..6
-                d.style.animation = 'none';
-                d.style.backgroundPosition = (-100 * (face - 1)) + '% 0';
-            });
-            btnRoll.disabled = false;
+            randomizeFaces();
+            rollsLeft--;
+            updateRollsUI();
+            btnRoll.disabled = (rollsLeft <= 0);
         }, 700);
+    }
+    function calcSum(arr){ return arr.reduce((a,b)=>a+b,0); }
+    function updateRollsUI(){ rollsUI.textContent = `Rolls Left: ${rollsLeft}`; }
+
+    function clearHoldsUI(){
+        holdBtns.forEach(b => {
+            b.setAttribute('aria-pressed','false');
+            b.classList.remove('is-held');
+        });
+    }
+    function resetAll(){
+        faces = [1,1,1,1,1];
+        setFacesVisual();
+        chanceEl.textContent   = '—';
+        subtotalEl.textContent = '0';
+        totalEl.textContent    = '0';
+        rollsLeft = MAX_ROLLS;
+        updateRollsUI();
+        clearHoldsUI();
+        btnRoll.disabled = false;
+    }
+
+    // ------- Init -------
+    loadHighScore();
+    setFacesVisual();
+    updateRollsUI();
+
+    // ------- Events -------
+    btnRoll.addEventListener('click', rollAnimationThenSet);
+
+    btnEnd.addEventListener('click', () => {
+        const score = calcSum(faces);
+        chanceEl.textContent = score;
+        subtotalEl.textContent = score;
+        totalEl.textContent = score;
+
+        const hs = loadHighScore();
+        if (score > hs) {
+            saveHighScore(score);
+            alert(`🎉 New High Score! ${score}`);
+        } else {
+            alert(`Your score: ${score}. High Score: ${hs}. Try again!`);
+        }
     });
 
-    btnReset.addEventListener('click', () => {
-        // Reset all dice to face 1
-        dice.forEach(d => {
-            d.style.animation = 'none';
-            d.style.backgroundPosition = '0 0';
+    btnEndTurn.addEventListener('click', () => {
+        rollsLeft = MAX_ROLLS;
+        updateRollsUI();
+        clearHoldsUI();
+        btnRoll.disabled = false;
+    });
+
+    btnReset.addEventListener('click', resetAll);
+
+    // Visual-only hold toggles
+    holdBtns.forEach(b => {
+        b.addEventListener('click', () => {
+            const current = b.getAttribute('aria-pressed') === 'true';
+            b.setAttribute('aria-pressed', String(!current));
+            b.classList.toggle('is-held', !current);
         });
     });
 </script>
