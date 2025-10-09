@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1c454495-fb11-44d8-acf3-d2c56b206b25" name="Changes" comment="&#10;Changes include:&#10;- Added HTML structure with semantic tags (&lt;header&gt;, &lt;main&gt;, &lt;section&gt;, &lt;footer&gt;)&#10;- Implemented resume sections: Education, Work Experience, Projects, Activities, Additional Information&#10;- Applied CSS styling for layout and typography&#10;- Used Flexbox for contacts list and two-column layout&#10;- Added responsive design with @media query for mobile view&#10;- Updated footer to dynamically show the current year" />
+    <list default="true" id="1c454495-fb11-44d8-acf3-d2c56b206b25" name="Changes" comment="&#10;Changes include:&#10;- Added HTML structure with semantic tags (&lt;header&gt;, &lt;main&gt;, &lt;section&gt;, &lt;footer&gt;)&#10;- Implemented resume sections: Education, Work Experience, Projects, Activities, Additional Information&#10;- Applied CSS styling for layout and typography&#10;- Used Flexbox for contacts list and two-column layout&#10;- Added responsive design with @media query for mobile view&#10;- Updated footer to dynamically show the current year">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -68,6 +70,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "lab04",
     "junie.onboarding.icon.badge.shown": "true",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
@@ -107,6 +110,7 @@
       <workItem from="1759771659954" duration="675000" />
       <workItem from="1759772354465" duration="12568000" />
       <workItem from="1759952528160" duration="1637000" />
+      <workItem from="1759958405979" duration="2155000" />
     </task>
     <task id="LOCAL-00001" summary="add resume.html and styles.css">
       <option name="closed" value="true" />
