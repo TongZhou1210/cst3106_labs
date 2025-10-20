@@ -1,0 +1,29 @@
+// dice.js — encapsulate rolling dice
+
+export class DiceSet {
+  /**
+   * @param {number} count number of dice (default 5 for Yatzy)
+   */
+  constructor(count = 5) {
+    this.count = count;
+    this.values = Array(count).fill(1);   // current faces
+    this.held   = Array(count).fill(false); // future use; not required yet
+  }
+
+  /** Roll all non-held dice; returns the new values. */
+  roll() {
+    for (let i = 0; i < this.count; i++) {
+      if (!this.held[i]) this.values[i] = 1 + Math.floor(Math.random() * 6);
+    }
+    return [...this.values];
+  }
+
+  /** Optional helper for future labs (not required now). */
+  setHeld(index, isHeld) { this.held[index] = !!isHeld; }
+
+  /** Reset dice to 1s and clear holds. */
+  reset() {
+    this.values.fill(1);
+    this.held.fill(false);
+  }
+}
