@@ -1,4 +1,4 @@
-// yatzyEngine.js — full scoring implementation
+// yatzyEngine.js — full scoring implementation + upper bonus helpers
 
 export const Categories = Object.freeze({
     ONES: 'Ones',
@@ -15,6 +15,12 @@ export const Categories = Object.freeze({
     CHANCE: 'Chance',
     YATZY: 'Yatzy'
 });
+
+// Upper section list for subtotal/bonus calculation
+const UPPER = [
+    Categories.ONES, Categories.TWOS, Categories.THREES,
+    Categories.FOURS, Categories.FIVES, Categories.SIXES
+];
 
 export class YatzyEngine {
     constructor() {
@@ -45,28 +51,24 @@ export class YatzyEngine {
     }
 
     static isFullHouse(counts) {
-        // Exactly 3 of a kind + exactly 2 of a kind (5 of a kind is NOT a full house in classic Yatzy)
+        // Exactly 3 of a kind + exactly 2 of a kind
         const vals = Object.values(counts);
         return vals.includes(3) && vals.includes(2);
     }
 
     static isSmallStraight(dice) {
-        // Small straight = contains any of {1,2,3,4} or {2,3,4,5} or {3,4,5,6}
+        // Contains any of {1,2,3,4}, {2,3,4,5}, {3,4,5,6}
         const s = new Set(dice);
-        const seqs = [
-            [1,2,3,4],
-            [2,3,4,5],
-            [3,4,5,6]
-        ];
+        const seqs = [[1,2,3,4],[2,3,4,5],[3,4,5,6]];
         return seqs.some(seq => seq.every(n => s.has(n)));
     }
 
     static isLargeStraight(dice) {
-        // Large straight = exactly {1,2,3,4,5} OR {2,3,4,5,6}
+        // Exactly {1,2,3,4,5} or {2,3,4,5,6}
         const s = new Set(dice);
         if (s.size !== 5) return false;
         const a = [1,2,3,4,5], b = [2,3,4,5,6];
-        const eq = (A) => A.every(n => s.has(n));
+        const eq = A => A.every(n => s.has(n));
         return eq(a) || eq(b);
     }
 
@@ -122,25 +124,52 @@ export class YatzyEngine {
     /**
      * Check if a selection is valid:
      * - Not already scored.
+     * - (Strict mode) Dice must satisfy the category unless it's Chance.
      */
     isValidSelection(category, diceValues) {
         if (this.scoreTable.get(category) != null) return false; // already used
-        // If you want strict validity (only allow scoring when dice fit the category), uncomment next line:
-        // return this.calculateScore(category, diceValues) > 0 || category === Categories.CHANCE;
-        return true; //
+        if (category === Categories.CHANCE) return true;
+        return this.calculateScore(category, diceValues) > 0;
     }
 
     /** Write score once (no overwrite). */
     setScore(category, value) {
         if (this.scoreTable.get(category) == null) {
             this.scoreTable.set(category, value);
+            return true;
         }
+        return false;
     }
 
-    /** Running total across all filled categories. */
-    total() {
+    /** Upper-section subtotal (ONES..SIXES). */
+    upperSubtotal() {
         let sum = 0;
-        for (const v of this.scoreTable.values()) if (typeof v === 'number') sum += v;
+        for (const k of UPPER) {
+            const v = this.scoreTable.get(k);
+            if (typeof v === 'number') sum += v;
+        }
         return sum;
     }
+
+    /** Classic Yatzy bonus: >=63 → +35; otherwise 0. */
+    upperBonus(threshold = 63, bonus = 35) {
+        return this.upperSubtotal() >= threshold ? bonus : 0;
+    }
+
+    /** Lower-section subtotal (everything except upper). */
+    lowerSubtotal() {
+        let sum = 0;
+        for (const [k, v] of this.scoreTable.entries()) {
+            if (!UPPER.includes(k) && typeof v === 'number') sum += v;
+        }
+        return sum;
+    }
+
+    /** Grand total (upper subtotal + bonus + lower subtotal). */
+    grandTotal() {
+        return this.upperSubtotal() + this.upperBonus() + this.lowerSubtotal();
+    }
+
+    /** Backward-compatible total() */
+    total() { return this.grandTotal(); }
 }
