@@ -23,6 +23,7 @@ Players roll five dice and fill in categories on the scorecard. The game is base
     - **Fours (4s)** → Add all dice showing 4.
     - **Fives (5s)** → Add all dice showing 5.
     - **Sixes (6s)** → Add all dice showing 6.
+    - **Bonus:** If the total of Ones–Sixes ≥ **63**, add a **+35 point bonus** automatically.
 
    👉 Example: if you roll **2, 2, 5, 6, 6**:
     - If you choose **Twos**, your score = 2 + 2 = **4 points**
@@ -39,7 +40,8 @@ Players roll five dice and fill in categories on the scorecard. The game is base
 
 3. **Turns and Game End**
     - Each turn, the player must record a score in one available category.
-    - The game ends when all categories are filled or the player chooses to end early.
+    - Each player has a maximum of **13 rounds** (one for each category).
+    - The game ends when all categories are filled or when the player chooses to end early.
     - The game displays:
         - The **final score**
         - A message: 🎉 Congratulatory if the player beats their high score, 😢 Consolation if not.
