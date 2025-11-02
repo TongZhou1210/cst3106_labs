@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Lab07 – Single Dice (Client–Server)</title>
+    <style>
+        /* ============================================================
+           Basic Styling and Layout
+           - Simple centered container with white card background
+           - Reuses dice sprite (dice1.jpg) from Assignment 1
+           ============================================================ */
+        body {
+            font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+            margin: 0;
+            padding: 24px;
+            background: #f6f7f9;
+            color: #1f2937;
+        }
+        h1 { margin: 0 0 12px; }
+
+        .wrap {
+            max-width: 820px;
+            margin: 0 auto;
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            box-shadow: 0 1px 2px rgba(0,0,0,.06);
+            padding: 20px;
+        }
+
+        .row { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+
+        /* Dice grid */
+        .dice { display: flex; gap: 14px; }
+
+        /* Each die uses a 6-frame horizontal sprite */
+        .die {
+            width: 92px;
+            height: 92px;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            background-image: url('./dice1.jpg');
+            background-size: 600% 100%;
+            background-position: 0 0;
+            position: relative;
+        }
+
+        /* Held dice are outlined and slightly dimmed */
+        .die.held {
+            outline: 3px solid #2E7D32;
+            filter: grayscale(.2) brightness(.95);
+        }
+
+        /* Buttons */
+        .controls {
+            margin-top: 16px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        button {
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 0;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .btn-primary { background: #2E7D32; color: #fff; }
+        .btn-secondary { background: #fff; border: 2px solid #2E7D32; color: #2E7D32; }
+
+        /* Error and hint messages */
+        .err { color: #b91c1c; margin-left: 10px; }
+        .hint { color: #6b7280; margin-top: 8px; }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <h1>Lab07 – Dice Module (Server-backed)</h1>
+    <p class="hint">
+        Click a die to <b>Hold/Unhold</b>.
+        Click <b>Roll</b> to request new dice values from <code>/roll-dices</code>.
+    </p>
+
+    <!-- Dice display area -->
+    <div class="row">
+        <div id="dice" class="dice" role="group" aria-label="Dice">
+            <div class="die" data-i="0" aria-label="Die 1"></div>
+            <div class="die" data-i="1" aria-label="Die 2"></div>
+            <div class="die" data-i="2" aria-label="Die 3"></div>
+            <div class="die" data-i="3" aria-label="Die 4"></div>
+            <div class="die" data-i="4" aria-label="Die 5"></div>
+        </div>
+    </div>
+
+    <!-- Control buttons -->
+    <div class="controls">
+        <button id="btn-roll" class="btn-primary">Roll</button>
+        <button id="btn-clear" class="btn-secondary">Clear Holds</button>
+        <span id="msg" class="err" aria-live="polite"></span>
+    </div>
+</div>
+
+<script>
+    // ============================================================
+    // Client-Side Logic
+    // ============================================================
+    // PURPOSE:
+    //   - Maintains local dice state (values + held flags)
+    //   - Sends a POST request to /roll-dices to get new dice values
+    //   - Updates dice display dynamically using the sprite image
+    // ============================================================
+
+    // Initial dice state
+    let values = [1, 1, 1, 1, 1];
+    let held   = [false, false, false, false, false];
+
+    const diceEls = Array.from(document.querySelectorAll('.die'));
+    const msgEl   = document.getElementById('msg');
+
+    /**
+     * Render dice visuals based on current values and held state.
+     * Each die face corresponds to a 100% horizontal shift in background position.
+     */
+    function render() {
+        diceEls.forEach((el, i) => {
+            const v = values[i];
+            const offset = -(v - 1) * 100;
+            el.style.backgroundPosition = `${offset}% 0`;
+            el.classList.toggle('held', held[i]);
+        });
+    }
+
+    /**
+     * Toggle held/unheld state when a die is clicked.
+     */
+    diceEls.forEach(el => {
+        el.addEventListener('click', () => {
+            const i = Number(el.getAttribute('data-i'));
+            held[i] = !held[i];
+            render();
+        });
+    });
+
+    /**
+     * Handle "Roll" button click.
+     * Sends a POST request to /roll-dices with current values and held states.
+     * Updates UI with returned dice values.
+     */
+    document.getElementById('btn-roll').addEventListener('click', async () => {
+        msgEl.textContent = '';
+        try {
+            const res = await fetch('/roll-dices', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ values, held })
+            });
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            const data = await res.json();
+            values = Array.isArray(data.dice) ? data.dice : values;
+            render();
+        } catch (e) {
+            msgEl.textContent = 'Failed to roll. Is the server running?';
+            console.error(e);
+        }
+    });
+
+    /**
+     * Handle "Clear Holds" button — resets all dice to unheld state.
+     */
+    document.getElementById('btn-clear').addEventListener('click', () => {
+        held = [false, false, false, false, false];
+        render();
+    });
+
+    // Initial rendering on page load
+    render();
+</script>
+</body>
+</html>

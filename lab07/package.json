@@ -1,0 +1,11 @@
+{
+  "name": "lab07-single-dice",
+  "type": "module",
+  "scripts": {
+    "start": "node single_dice.server.js",
+    "dev": "node --watch single_dice.server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
