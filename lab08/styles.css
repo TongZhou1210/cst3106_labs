@@ -1,0 +1,35 @@
+/* Basic page styling */
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    padding: 20px;
+}
+
+/* Center the die */
+.dice-area {
+    margin: 20px 0;
+}
+
+/* === Reused from Yatzy styles.css === */
+/* Single die visual using  dice1.jpg sprite */
+.die {
+    width: 92px;
+    height: 92px;
+    border-radius: 12px;
+    border: 1px solid #E5E7EB;
+    background-image: url("./dice1.jpg"); /* SAME image as Yatzy game */
+    background-size: 600% 100%;           /* 6 faces in one row */
+    background-position: 0 0;             /* start at value 1 */
+    box-shadow: 0 1px 2px rgba(0,0,0,.06);
+}
+
+/* Rolling animation */
+@keyframes roll {
+    0%   { background-position: 0% 0; }
+    100% { background-position: -600% 0; }
+}
+
+/* When this class is added, the die animates */
+.die.rolling {
+    /* 700ms, 6 steps (one per face), infinite loop until we stop it in JS */
+    animation: roll 700ms steps(6) infinite;
+}
