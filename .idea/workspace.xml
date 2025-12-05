@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1c454495-fb11-44d8-acf3-d2c56b206b25" name="Changes" comment="first version before demo">
-      <change afterPath="$PROJECT_DIR$/lab10/lab11/dm.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab10/lab11/schema.png" afterDir="false" />
+    <list default="true" id="1c454495-fb11-44d8-acf3-d2c56b206b25" name="Changes" comment="fix the wrong path">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab11/dm.md" beforeDir="false" afterPath="$PROJECT_DIR$/lab11/dm.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab11/schema.png" beforeDir="false" afterPath="$PROJECT_DIR$/lab11/schema.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,31 +67,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "JavaScript Debug.index.html.executor": "Run",
-    "JavaScript Debug.resume.html.executor": "Run",
-    "JavaScript Debug.single_dice.html.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "lab11",
-    "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "/Users/tongzhou/WebstormProjects/cst3106_labs/lab08",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_interpreter_path": "/Users/tongzhou/Library/Application Support/JetBrains/WebStorm2025.2/node/versions/22.20.0/bin/node",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;JavaScript Debug.index.html.executor&quot;: &quot;Run&quot;,
+    &quot;JavaScript Debug.resume.html.executor&quot;: &quot;Run&quot;,
+    &quot;JavaScript Debug.single_dice.html.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;lab11&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/tongzhou/WebstormProjects/cst3106_labs/lab08&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;/Users/tongzhou/Library/Application Support/JetBrains/WebStorm2025.2/node/versions/22.20.0/bin/node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/lab08" />
@@ -99,10 +99,11 @@
       <recent name="$PROJECT_DIR$/lab06" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lab11" />
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/lab10/lab11" />
       <recent name="$PROJECT_DIR$/lab10/images" />
       <recent name="$PROJECT_DIR$/lab05" />
-      <recent name="$PROJECT_DIR$/lab04" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -135,7 +136,9 @@
       <workItem from="1763342671164" duration="630000" />
       <workItem from="1763838382913" duration="1455000" />
       <workItem from="1763999954865" duration="3719000" />
-      <workItem from="1764176718922" duration="2765000" />
+      <workItem from="1764176718922" duration="4229000" />
+      <workItem from="1764774754081" duration="6202000" />
+      <workItem from="1764956556235" duration="1077000" />
     </task>
     <task id="LOCAL-00001" summary="add resume.html and styles.css">
       <option name="closed" value="true" />
@@ -233,7 +236,23 @@
       <option name="project" value="LOCAL" />
       <updated>1763839234265</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="first version before demo">
+      <option name="closed" value="true" />
+      <created>1764262741165</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1764262741165</updated>
+    </task>
+    <task id="LOCAL-00014" summary="fix the wrong path">
+      <option name="closed" value="true" />
+      <created>1764262918913</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1764262918913</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -246,6 +265,7 @@
     <MESSAGE value="lab7 version1 before demo" />
     <MESSAGE value="lab8 version1 before demo" />
     <MESSAGE value="first version before demo" />
-    <option name="LAST_COMMIT_MESSAGE" value="first version before demo" />
+    <MESSAGE value="fix the wrong path" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix the wrong path" />
   </component>
 </project>

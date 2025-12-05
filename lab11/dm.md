@@ -16,15 +16,17 @@ It contains:
 
 - Basic demographic data (name, age)
 - Clinical data (symptoms, pain level, notes)
-- Operational data (current triage level, estimated wait time, status, created timestamp)
+- Operational data: current triage level code, estimated wait time, status, and timestamps.
 
 This table is the central entity used by both the patient-facing and admin-facing screens.
 
 ---
 
-### 1.2 Triage Levels
+### 1.2 Levels
 
-The **triage_levels** entity represents the different urgency levels used to classify patients.
+The **levels**  entity represents the different triage levels used to classify patients.
+It stores a short numeric code and a label such as “Level 1”, “Level 2”, or “Level 3”.
+This table is referenced by the patients table via triage_level_code.
 
 It contains:
 
@@ -37,77 +39,37 @@ This table is referenced by both **patients** and **priority_history**.
 
 ---
 
-### 1.3 Priority History
-
-The **priority_history** entity records every change made to a patient’s triage level.
-
-It contains:
-
-- A reference to the patient
-- The previous and new triage levels
-- The time of change
-- Optional metadata such as the reason and the staff/admin who made the change
-
-This table allows the system to reconstruct how a patient’s priority evolved over time.
-
----
-
 ## 2. Attributes Specification
 
 ### 2.1 Table: `patients`
 
-| Field                | Type          | Constraints                                          | Description                                                   |
-|----------------------|---------------|------------------------------------------------------|---------------------------------------------------------------|
-| `patient_id`         | INT           | PRIMARY KEY, auto-increment                         | Unique identifier for each patient                            |
-| `name`               | TEXT          | NOT NULL                                            | Patient full name                                             |
-| `age`                | INT           | NOT NULL                                            | Patient age in years                                          |
-| `symptoms`           | TEXT          | NOT NULL                                            | Description of main symptoms                                  |
-| `pain_level`         | INT           | NOT NULL                                            | Pain score (1–10)                                             |
-| `notes`              | TEXT          | NULL                                                | Additional notes such as allergies or medications             |
-| `current_triage_id`  | INT           | FOREIGN KEY → `triage_levels.triage_id`, NOT NULL  | Currently assigned triage level                               |
-| `est_wait_minutes`   | INT           | NULL                                                | Estimated wait time in minutes                                |
-| `status`             | TEXT          | NULL                                                | Patient status (e.g., `"waiting"`, `"completed"`)             |
-| `created_at`         | DATETIME/INT  | NOT NULL                                            | Timestamp when the patient record was created                 |
-
+| Field              | Type        | Constraints                                                        | Description                                      |
+|--------------------|------------|--------------------------------------------------------------------|--------------------------------------------------|
+| `id`               | SERIAL     | PRIMARY KEY                                                        | Unique identifier for each patient               |
+| `name`             | TEXT       | NOT NULL                                                           | Patient full name                                |
+| `age`              | INTEGER    | CHECK (age >= 0)                                                   | Patient age in years (can be NULL if unknown)    |
+| `symptoms`         | TEXT       | NULL                                                               | Description of main symptoms                     |
+| `pain_level`       | INTEGER    | CHECK (pain_level BETWEEN 1 AND 10)                                | Pain score from 1 to 10                          |
+| `notes`            | TEXT       | NULL                                                               | Additional notes such as allergies or medications|
+| `triage_level_code`| SMALLINT   | NOT NULL, FOREIGN KEY → `levels.triage_level_code`                 | Current triage level                             |
+| `estimated_wait_min` | INTEGER  | NULL                                                               | Estimated wait time in minutes                   |
+| `status`           | TEXT       | NOT NULL, DEFAULT 'waiting'                                        | Patient status (e.g., `waiting`, `completed`)    |
+| `created_at`       | TIMESTAMPTZ| NOT NULL, DEFAULT NOW()                                            | Timestamp when the record was created            |
+| `updated_at`       | TIMESTAMPTZ| NOT NULL, DEFAULT NOW()                                            | Timestamp when the record was last updated       |
 ---
 
-### 2.2 Table: `triage_levels`
+### 2.2 Table: `levels`
 
-| Field                  | Type          | Constraints                            | Description                                                |
-|------------------------|---------------|----------------------------------------|------------------------------------------------------------|
-| `triage_id`            | INT           | PRIMARY KEY, auto-increment           | Unique identifier for each triage level                    |
-| `code`                 | INT           | NOT NULL                               | Numeric triage code (e.g., 1, 2, 3, 4)                     |
-| `name`                 | TEXT          | NOT NULL                               | Descriptive name (e.g., `"Resuscitation"`, `"Urgent"`)     |
-| `color`                | TEXT          | NULL                                   | Optional color code (e.g., `"red"`, `"yellow"`, `"green"`) |
-| `default_wait_minutes` | INT           | NOT NULL                               | Default wait time in minutes                               |
-| `description`          | TEXT          | NULL                                   | Explanation or clinical description of the triage level    |
-
----
-
-### 2.3 Table: `priority_history`
-
-| Field            | Type          | Constraints                                           | Description                                                    |
-|------------------|---------------|-------------------------------------------------------|----------------------------------------------------------------|
-| `history_id`     | INT           | PRIMARY KEY, auto-increment                          | Unique identifier for each history record                      |
-| `patient_id`     | INT           | FOREIGN KEY → `patients.patient_id`, NOT NULL        | Patient whose priority was changed                             |
-| `old_triage_id`  | INT           | FOREIGN KEY → `triage_levels.triage_id`, NULL        | Previous triage level (nullable for first assignment)          |
-| `new_triage_id`  | INT           | FOREIGN KEY → `triage_levels.triage_id`, NOT NULL    | Updated triage level                                           |
-| `changed_at`     | DATETIME/INT  | NOT NULL                                             | Timestamp when the priority change was made                    |
-| `reason`         | TEXT          | NULL                                                 | Optional reason for changing triage level                      |
-| `changed_by`     | TEXT          | NULL                                                 | Optional identifier for the staff/admin who made the change    |
-
+| Field              | Type      | Constraints              | Description                                      |
+|--------------------|-----------|--------------------------|--------------------------------------------------|
+| `triage_level_code`| SMALLINT  | PRIMARY KEY              | Numeric triage code (1, 2, 3, …)                 |
+| `label`            | TEXT      | NOT NULL                 | Display label for the level (e.g., 'Level 1')    |
 ---
 
 ## 3. Relationships
 
-1. **`triage_levels` (1) → (M) `patients`**  
+**`levels` (1) → (M) `patients`**  
    One triage level can be assigned to many patients.
-
-2. **`patients` (1) → (M) `priority_history`**  
-   One patient can have multiple priority changes.
-
-3. **`triage_levels` (1) → (M) `priority_history`**  
-   Triage levels appear as both old/new classifications in history records.
 
 ---
 
